@@ -1,27 +1,59 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Item from './components/Item'
+import axios from 'axios'
+import { nanoid } from 'nanoid'
+
 
 function App() {
 
+  const [items, setItems] = useState([])
   const [formData, setFormData] = useState({
+    id: nanoid(),
     productName: '',
     description: '',
     price: 0,
     quantity: 0,
   })
 
+  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     
     const {id, value} = e.target;
-    setFormData(prevState => ({...prevState, [id]: value}))
+    setFormData(prevState => ({...prevState, [e.target.id]: value}))
 
     
   }
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(formData)
+    
+
+    try {
+      
+      await axios.post('http://localhost:8080/item/add', formData)
+      console.log(formData)
+    } catch (error) {
+      console.log(error)
+    }
   }
+
+  useEffect(() => {
+    const getItems = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/item')
+        setItems(response.data)
+        console.log(response.data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    
+    getItems();
+  }, [])
+
+
 
   
 
@@ -46,8 +78,19 @@ function App() {
 
     </form>
 
-      <div><Item name="Baly Tropical" description='Energético sabor Tropical' price={10} img='https://crsupermercados.com.br/cdn/shop/files/ENERG-BALY-TROPICAL.png' stock={3512}/></div>
+      <div><Item name={formData.productName} description={formData.description} price={formData.price} img='https://crsupermercados.com.br/cdn/shop/files/ENERG-BALY-TROPICAL.png' quantity={formData.quantity}/></div>
 
+    </div>
+
+    <div>
+    <h1>Itens cadastrados:</h1>
+    <ul>
+      {items.map(item => (
+        <li key={item.id}>
+          <Item name={item.productName} description={item.description} price={item.price} img='Placeholder'/>
+        </li>
+      ))}
+    </ul>
     </div>
 
 

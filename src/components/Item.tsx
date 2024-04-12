@@ -6,12 +6,12 @@ interface ItemProps {
     description?: string,
     price?: number,
     img?: string,
-    stock?: number
+    quantity?: number
 }
 
 
 
-const Item: React.FC<ItemProps> = ({ name, description, price, img, stock }) => {
+const Item: React.FC<ItemProps> = ({ name, description, price, img, quantity }) => {
     return (
         <div className="bg-gray-300 p-4 w-[350px] h-[350px] rounded-md flex flex-col items-center">
             <div className="bg-white rounded-md w-[280px]">
@@ -29,14 +29,14 @@ const Item: React.FC<ItemProps> = ({ name, description, price, img, stock }) => 
                 <h3>
                 Preço:
                 </h3>
-                R${price?.toFixed(2)}
+                R${price},00
                 </div>
 
                 <div className="flex flex-col items-center px-2">
                 <h3>
                 Estoque:
                 </h3>
-                {stock}
+                {quantity}
                 </div>               
             </div>
             </div>
