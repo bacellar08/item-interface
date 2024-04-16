@@ -14,7 +14,7 @@ const { data }  = useItemData();
 
     <ItemModal/>
 
-    <div>
+    <div className='flex'>
       {data?.map(itemData =>
       <Item
         name={itemData.productName}

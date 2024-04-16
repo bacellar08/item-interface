@@ -1,4 +1,5 @@
-
+import { FaPencilAlt } from "react-icons/fa";
+import { FaTrashCan } from "react-icons/fa6";
 
 
 interface ItemProps {
@@ -13,9 +14,9 @@ interface ItemProps {
 
 const Item: React.FC<ItemProps> = ({ name, description, price, img, quantity }) => {
     return (
-        <div className="bg-gray-300 p-4 w-[350px] h-[350px] rounded-md flex flex-col items-center">
+        <div className="bg-gray-300 p-4 w-[350px] m-2 rounded-md flex flex-col items-center">
             <div className="bg-white rounded-md w-[280px]">
-                <img src={img} alt="Baly Tropical" />
+                <img src={img} alt="Foto do produto" />
             </div>
             <div className="flex flex-col items-center p-5 content-between">
             <h2 className="font-bold text-red-700 text-xl">
@@ -38,6 +39,10 @@ const Item: React.FC<ItemProps> = ({ name, description, price, img, quantity }) 
                 </h3>
                 {quantity}
                 </div>               
+            </div>
+            <div>
+                <button className="px-2 w-[100px] h-10 bg-slate-500 text-white rounded-md m-1">Editar <FaPencilAlt className="inline mx-1" /></button>
+                <button className="px-2 w-[100px] h-10 bg-red-800 text-white rounded-md m-1">Excluir <FaTrashCan className="inline mx-1" /></button>
             </div>
             </div>
         </div>
