@@ -16,7 +16,8 @@ const { data }  = useItemData();
 
     <div className='flex'>
       {data?.map(itemData =>
-      <Item
+      <Item key={itemData.id}
+      id={itemData.id}
         name={itemData.productName}
         description={itemData.description}
         price={itemData.price}

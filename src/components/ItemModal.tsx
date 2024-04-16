@@ -31,7 +31,7 @@ const ItemModal = () => {
     const [price, setPrice] = useState(0)
     const [quantity, setQuantity] = useState(0)
     const [image, setImage] = useState('') 
-    const { mutate } = useItemDataMutation()
+    const { postMutation } = useItemDataMutation()
 
 
     const submit = () => {
@@ -43,7 +43,7 @@ const ItemModal = () => {
             image
         }
 
-        mutate(itemData)
+        postMutation.mutate(itemData)
     }
 
 
